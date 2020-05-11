@@ -16,6 +16,7 @@ typedef struct aircraft
     int aircraft_num;
     int status;         //0 is for landing and 1 is for takeoff
     int fuel_remaining; //landing case, given in units of time
+    int queue_wait_time;
 } AIRCRAFT;
 
 //Landing queue
@@ -45,6 +46,8 @@ TAKEOFF *TAIL_TO;
 void initializer(int, float, float);
 AIRCRAFT aircraft_generator();
 void queue_generator();
+void main_loop();
+void increase_queue_wait_time();
 
 //Queue controllers
 void landing_queue_add(AIRCRAFT);

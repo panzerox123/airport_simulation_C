@@ -18,6 +18,7 @@ void landing_queue_add(AIRCRAFT dat)
         temp->plane = dat;
         TAIL_LAND->link = temp;
         TAIL_LAND = temp;
+        printf("Plane %d ready to land.\n", temp->plane.aircraft_num);
     }
     temp = NULL;
     free(temp);
@@ -31,6 +32,7 @@ void landing_queue_remove()
     }
     else
     {
+        printf("Plane %d has landed. Waiting in queue for %d units.\n", HEAD_LAND->plane.aircraft_num, HEAD_LAND->plane.queue_wait_time);
         HEAD_LAND = HEAD_LAND->link;
     }
 }
@@ -52,6 +54,7 @@ void takeoff_queue_add(AIRCRAFT dat)
         temp->plane = dat;
         TAIL_TO->link = temp;
         TAIL_TO = temp;
+        printf("Plane %d ready to takeoff.\n", temp->plane.aircraft_num);
     }
     temp = NULL;
     free(temp);
@@ -65,6 +68,7 @@ void takeoff_queue_remove()
     }
     else
     {
+        printf("Plane %d has taken off. Waiting in queue for %d units.\n", HEAD_TO->plane.aircraft_num, HEAD_TO->plane.queue_wait_time);
         HEAD_TO = HEAD_TO->link;
     }
 }
