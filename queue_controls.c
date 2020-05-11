@@ -33,6 +33,8 @@ void landing_queue_remove()
     else
     {
         printf("Plane %d has landed. Waiting in queue for %d units.\n", HEAD_LAND->plane.aircraft_num, HEAD_LAND->plane.queue_wait_time);
+        NUMBER_LANDED++;
+        QUEUE_TIME_LANDED += HEAD_LAND->plane.queue_wait_time;
         HEAD_LAND = HEAD_LAND->link;
     }
 }
@@ -69,6 +71,8 @@ void takeoff_queue_remove()
     else
     {
         printf("Plane %d has taken off. Waiting in queue for %d units.\n", HEAD_TO->plane.aircraft_num, HEAD_TO->plane.queue_wait_time);
+        QUEUE_TIME_TAKEOFF += HEAD_TO->plane.queue_wait_time;
         HEAD_TO = HEAD_TO->link;
+        NUMBER_TAKEN_OFF++;
     }
 }

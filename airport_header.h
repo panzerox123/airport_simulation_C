@@ -1,9 +1,16 @@
 //Simulation constants
 int SIM_RUN_TIME;
-float EXPECTED_TAKEOFF_PER_UNIT;
-float EXPECTED_LANDING_PER_UNIT;
+int EXPECTED_AIRCRAFTS_PER_UNIT;
 int AIRCRAFT_NUM;
 int RUNTIME;
+
+int NUMBER_LANDED;
+int NUMBER_TAKEN_OFF;
+int NUMBER_LEFT_LAND;
+int NUMBER_LEFT_TAKEOFF;
+int RUNWAY_IDLE_NUM;
+int QUEUE_TIME_LANDED;
+int QUEUE_TIME_TAKEOFF;
 
 /*
 RUNWAY_STATUS is 0 when idle, 1 when occupied
@@ -43,15 +50,16 @@ TAKEOFF *TAIL_TO;
 
 //Function Definitions
 
-void initializer(int, float, float);
+void initializer(int, int);
 AIRCRAFT aircraft_generator();
 void queue_generator();
 void main_loop();
 void increase_queue_wait_time();
+void number_left();
+void final_stats();
 
 //Queue controllers
 void landing_queue_add(AIRCRAFT);
 void landing_queue_remove();
 void takeoff_queue_add(AIRCRAFT);
 void takeoff_queue_remove();
-
