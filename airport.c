@@ -186,7 +186,7 @@ int immediate_land()
             }
             else if (temp->link->plane.fuel_remaining < queue)
             {
-                printf("Plane %d has landed. Waiting in queue for %d units.\n", temp->link->plane.aircraft_num, temp->link->plane.queue_wait_time);
+                printf("Plane %d has landed (Emergency). Waiting in queue for %d units.\n", temp->link->plane.aircraft_num, temp->link->plane.queue_wait_time);
                 NUMBER_LANDED++;
                 QUEUE_TIME_LANDED += temp->link->plane.queue_wait_time;
                 temp->link = temp->link->link;
