@@ -11,6 +11,7 @@ int NUMBER_LEFT_TAKEOFF;
 int RUNWAY_IDLE_NUM;
 int QUEUE_TIME_LANDED;
 int QUEUE_TIME_TAKEOFF;
+int CRASHED_PLANES;
 
 /*
 RUNWAY_STATUS is 0 when idle, 1 when occupied
@@ -57,6 +58,7 @@ void main_loop();
 void increase_queue_wait_time();
 void number_left();
 void final_stats();
+int immediate_land();
 
 //Queue controllers
 void landing_queue_add(AIRCRAFT);
