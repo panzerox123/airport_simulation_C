@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+The initializer function intializes all the constants in the simulation program.
+*/
 void initializer(int srt, int eapu)
 {
     SIM_RUN_TIME = srt;
@@ -24,8 +27,9 @@ void initializer(int srt, int eapu)
     srand(time(0));
     return;
 }
-
-//Generates Unique aircraft
+/*
+aircraft_generator Generates a unique type of aircraft every time it is called
+*/
 AIRCRAFT aircraft_generator()
 {
     AIRCRAFT PLANE;
@@ -37,6 +41,9 @@ AIRCRAFT aircraft_generator()
     return PLANE;
 }
 
+/*
+queue_generator generates a randomised queue of aircrafts every unit of time
+*/
 void queue_generator()
 {
     //srand(time(0));
@@ -52,6 +59,11 @@ void queue_generator()
     }
 }
 
+/*
+main_loop is the loop that runs for N units of time and generated a queue every unit.
+One plane can take off or land per unit, with landing queue being priorotised.
+Wait time and fuel consumption is also changed every iteration.
+*/
 void main_loop()
 {
     queue_generator();
@@ -86,6 +98,10 @@ void main_loop()
     }
 }
 
+/*
+increase_queue_wait_time function increases the waiting time for all aircrafts that have not landed or taken off.
+It also reduces the fuel remaining in all aircrafts.
+*/
 void increase_queue_wait_time()
 {
     LANDING *temp1 = malloc(sizeof(LANDING));
@@ -119,6 +135,9 @@ void increase_queue_wait_time()
     }
 }
 
+/*
+number_left function counts the number of aircrafts left in each queue.
+*/
 void number_left()
 {
     LANDING *temp1 = malloc(sizeof(LANDING));
@@ -151,6 +170,10 @@ void number_left()
     }
 }
 
+/*
+final_stats function is responsible for calculating the results from running the simulation.
+*/
+
 void final_stats()
 {
     number_left();
@@ -162,6 +185,11 @@ void final_stats()
         avg_land_queue = (float)QUEUE_TIME_LANDED / NUMBER_LANDED;
     printf("\nSIMULATION RESULTS:\nNumber Landed: %d\nNumber Taken off: %d\nNumber left to land: %d\nNumber left to takeoff: %d\nRunway idle time: %.2f percent\nAverage takeoff wait: %.2f units\nAverage land wait: %.2f units\nPlanes crashed: %d\n", NUMBER_LANDED, NUMBER_TAKEN_OFF, NUMBER_LEFT_LAND, NUMBER_LEFT_TAKEOFF, runway_idle_percent, avg_takeoff_queue, avg_land_queue, CRASHED_PLANES);
 }
+
+/*
+immediate_land function lands a plane that does not have enough fuel to wait in queue immediately.
+If the plane has been waiting and the fuel remaining is 0, the plane crashes.
+*/
 
 int immediate_land()
 {
@@ -179,7 +207,7 @@ int immediate_land()
             queue++;
             if (temp->link->plane.fuel_remaining < 0)
             {
-                printf("Plane %d has CRASHED. %d units of fuel.\n",temp->link->plane.aircraft_num,temp->link->plane.fuel_remaining);
+                printf("Plane %d has CRASHED. %d units of fuel.\n", temp->link->plane.aircraft_num, temp->link->plane.fuel_remaining);
                 temp->link = temp->link->link;
                 CRASHED_PLANES++;
                 return 1;
@@ -196,3 +224,43 @@ int immediate_land()
         }
     }
 }
+
+/*
+menu_loop function runs a switch statement in a loop to run the simulation program as many times as your want.
+*/
+
+void menu_loop()
+{
+    char selection;
+    while (1)
+    {
+        printf("\nAIRPORT TRAFFIC SIMULATION\npress '1' to simulate or '2' to quit.\nChoice: \n");
+        scanf(" %c", &selection);
+        switch (selection)
+        {
+        case '1':
+            printf("Initialize simulator... \n");
+            unsigned int runtime;
+            unsigned int max_aircrafts;
+            printf("Enter units of time:\n");
+            scanf("%d", &runtime);
+            printf("Enter maximum number of aircrafts that can be generated per unit of time:\n");
+            scanf("%d", &max_aircrafts);
+            initializer(runtime, max_aircrafts);
+            main_loop();
+            final_stats();
+            break;
+
+        case '2':
+            exit(0);
+
+        default:
+            printf("Option entered is incorrect... try again.\n");
+        }
+    }
+}
+
+/*
+Version 1.0.0
+Kunal Bhat
+*/

@@ -3,6 +3,10 @@
 #include <stdlib.h>
 
 //Landing queue controls
+
+/*
+landing_queue_add adds an aircraft to the landing queue.
+*/
 void landing_queue_add(AIRCRAFT dat)
 {
     LANDING *temp = malloc(sizeof(LANDING));
@@ -24,6 +28,9 @@ void landing_queue_add(AIRCRAFT dat)
     free(temp);
 }
 
+/*
+landing_queue_remove removes an aircraft/lands it.
+*/
 void landing_queue_remove()
 {
     if (HEAD_LAND == NULL)
@@ -41,6 +48,9 @@ void landing_queue_remove()
 
 //Takeoff queue controls
 
+/*
+takeoff_queue_add adds an aircraft to the takeoff queue.
+*/
 void takeoff_queue_add(AIRCRAFT dat)
 {
     TAKEOFF *temp = malloc(sizeof(TAKEOFF));
@@ -62,6 +72,9 @@ void takeoff_queue_add(AIRCRAFT dat)
     free(temp);
 }
 
+/*
+takeoff_queue_remove removes an aircraft from the takeoff queue/the plane takes off.
+*/
 void takeoff_queue_remove()
 {
     if (HEAD_TO == NULL)

@@ -59,6 +59,7 @@ void increase_queue_wait_time();
 void number_left();
 void final_stats();
 int immediate_land();
+void menu_loop();
 
 //Queue controllers
 void landing_queue_add(AIRCRAFT);
