@@ -32,7 +32,7 @@ There are 2 operation modes, the program loop or the command line arguments. The
 
 ## Usage
 
-./simulation_app <max units of time> <max number of randomly generated aircrafts>
+./simulation_app [max units of time] [max number of randomly generated aircrafts]
 
 or just
 
